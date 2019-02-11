@@ -1,4 +1,4 @@
 # trinkets
 compiled scripts and tools for customising terminal window
 
-with apples by David Miller -->
+with apples by David Miller --> https://github.com/davidfmiller
