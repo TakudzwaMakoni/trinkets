@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Modify the settings profile of the active Terminal.app window via command-line
+"""
+
+# tell application "Terminal"
+#   try
+#     set current settings of selected tab of window 1 to (settings set "Pro")
+#   on error
+#     beep
+#   end try
+# end tell
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v')
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage: > terminal-profile {profile} \n")
+  sys.exit(2)
+
+verbose = False
+
+for opt, arg in opts:
+  if opt == '-v':
+    verbose = True
+
+if len(args) > 1:
+  sys.stderr.write("🚫  Invalid Terminal setting specified: " + str(args) + "\n")
+  sys.exit(2)
+
+# if no profile specified use "Pro"
+elif len(args) == 0:
+  args = ["Pro"]
+
+cmd = "  try\n    set current settings of selected tab of window 1 to (settings set \"" + args[0] + "\")\n  on error\n    beep\n  end try\n"
+cmd = "tell application \"Terminal\"\n" + cmd + "end tell\n"
+f = tempfile.NamedTemporaryFile(delete=False)
+f.write(cmd)
+
+if verbose:
+  f.seek(0)
+  sys.stdout.write("🍎")
+  sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+f.close()
+
+out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
