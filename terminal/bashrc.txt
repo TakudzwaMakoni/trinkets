@@ -3,7 +3,7 @@ normal=$(tput sgr0)
 echo "FROM ${bold}BASHRC${normal}"
 
 PS1="\@ | \u | \W   ▶  "
-PATH="$PATH:~/Trinkets/git/apples"
+PATH="$PATH:~/trinkets/apples"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
