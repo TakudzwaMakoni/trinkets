@@ -29,8 +29,35 @@ yt_filename(){
     youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ has already been downloaded//; s/ //;'
 }
 
-ytdl(){
+ytsave(){
     OLD=$(yt_filename "$2");
     NEW=$1;
-    mv "$OLD" "$NEW";
+    if [  -d "$NEW"  ]; then
+        echo "${bold}$NEW${normal} is already a directory.";
+        echo "file saved in working directory as ${bold}$OLD${normal}.";
+    elif [  -f "$NEW"  ]; then
+        echo "${bold}$NEW${normal} is already a file.";
+        echo "file saved in working directory as ${bold}$OLD${normal}.";
+    else
+        mv "$OLD" "$NEW";
+        echo "file saved in working directory as ${bold}$NEW${normal}."
+    fi
+}
+
+ytplay(){
+    OLD=$(yt_filename "$2");
+    NEW=$1;
+    if [  -d "$NEW"  ]; then
+        echo "${bold}$NEW${normal} is already a directory.";
+        echo "file saved in working directory as ${bold}$OLD${normal}.";
+        mplayer "$OLD";
+    elif [  -f "$NEW"  ]; then
+        echo "${bold}$NEW${normal} is already a file.";
+        echo "file saved in working directory as ${bold}$OLD${normal}.";
+        mplayer "$OLD";
+    else
+        echo "file saved in working directory as ${bold}$NEW${normal}."
+        mv "$OLD" "$NEW";
+        mplayer "$NEW";
+    fi
 }
