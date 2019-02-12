@@ -24,3 +24,13 @@ img(){
     imgcat $1;
     echo "";
 }
+
+yt_filename(){
+    youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ has already been downloaded//; s/ //;'
+}
+
+ytdl(){
+    OLD=$(yt_filename "$2");
+    NEW=$1;
+    mv "$OLD" "$NEW";
+}
