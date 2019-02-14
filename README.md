@@ -46,9 +46,9 @@ commands for iTerm2:
 
 #^ With three argments such as "start -f -o examplefile" or "start -o -f examplefile", the command creates and opens the extensionless text file.
 
-ytsave [SAVE AS] [YOUTUBE URL] #modification of youtube-dl, save youtube file to directory.
+ytsave [SAVE AS] [YOUTUBE URL] #modification of youtube-dl, save youtube file to directory with checks if file /directory exists.
 
-ytsave [SAVE AS] [YOUTUBE URL] #modification of youtube-dl, save youtube file to directory, and play play the video. (requires mplayer)
+ytplay [SAVE AS] [YOUTUBE URL] #modification of youtube-dl, save youtube file to directory, and play play the video, with checks if file /directory exists. (requires mplayer)
 
 vplay [PATH/TO/VIDEO]
 
