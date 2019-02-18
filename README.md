@@ -52,4 +52,9 @@ ytplay [SAVE AS] [YOUTUBE URL] #modification of youtube-dl, save youtube file to
 
 vplay [PATH/TO/VIDEO]
 
+setsc [SHORTCUT] [PATH TO DIRECTORY] #set shortcut name to a path to a directory. accessed using sc [SHORTCUT]
+
+sc [SHORTCUT] #cd shortcut to path specified by setsc.
+
+
  
