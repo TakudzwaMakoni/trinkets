@@ -1,5 +1,3 @@
-#!/bin/bash
-
 source "${HOME}/.trinkets/ss/M0.bash"
 source "${HOME}/.trinkets/ss/M1.bash"
 bold=$(tput bold)
