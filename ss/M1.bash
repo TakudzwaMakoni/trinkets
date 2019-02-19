@@ -126,12 +126,12 @@ mpsyt "$1";
 }
 
 setsc(){
-if grep -q "~$1:" ~/.shortcuts; then
+if grep -q "~$1:" ~/.trinkets/.shortcuts; then
 echo "$1 is already a shortcut";
 while true; do
 read -p "replace shortcut? " yn
 case $yn in
-[Yy]* ) LINE=$( grep "~$1:" ~/.shortcuts ); sed -i ".bck"  "s#$LINE#~$1:$2#g" ~/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
+[Yy]* ) LINE=$( grep "~$1:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#~$1:$2#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
 [Nn]* ) echo "did nothing."; break;;
 * ) echo "Please answer yes or no.";;
 esac
@@ -140,7 +140,7 @@ else
 if [ -d "$2" ]; then
 echo "~$1:$2" >> ~/.shortcuts
 elif [ "$2" == "" ]; then
-echo "~$1:$PWD" >> ~/.shortcuts;
+echo "~$1:$PWD" >> ~/.trinkets/.shortcuts;
 else
 echo "${bold}$2${normal} is not a directory.";
 fi
@@ -148,5 +148,5 @@ fi
 }
 
 sc(){
-cd $( grep "~$1:" ~/.shortcuts | cut -d":" -f 2 );
+cd $( grep "~$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 );
 }

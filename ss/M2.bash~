@@ -1,0 +1,10 @@
+#!/bin/bash
+
+bndcmp(){
+    DEF=$( grep "~bndcmp:" ~/.trinkets/.defaults | cut -d":" -f 2 )
+    if [ "$#" == 1 ]; then
+	test mpv "https://$DEF.bandcamp.com/album/$1";
+    else
+	test mpv "https://$1.bandcamp.com/album/$2";
+    fi
+}
