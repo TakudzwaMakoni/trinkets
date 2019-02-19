@@ -1,0 +1,31 @@
+#!/bin/bash
+
+pr(){ . ~/.bashrc; }
+
+prof(){
+echo -n -e "\033]50;SetProfile=$1\x7"
+}
+
+inv(){
+printf "\e[?5h"
+}
+
+rev(){
+printf "\e[?5l"
+}
+
+img(){
+echo "";
+imgcat $1;
+echo "";
+}
+
+fndr(){
+if [ -d "$1" ]; then
+open "$1";
+elif [ "$1" == ""  ]; then
+open "$PWD";
+else
+echo "${bold}$1${normal} is not a directory"
+fi
+}
