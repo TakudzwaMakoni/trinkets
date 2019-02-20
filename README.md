@@ -18,7 +18,6 @@ compiled scripts and tools for customising terminal window
 
 with modifications to :
 
-apples by David Miller --> https://github.com/davidfmiller
 youtube-dl --> https://github.com/rg3/youtube-dl/
 
 commands for iTerm2:
