@@ -1,0 +1,9 @@
+BB 50
+WW 3
+BB 10
+K 20
+BRG 50
+K 3
+MU 7
+K 3
+BRG 10

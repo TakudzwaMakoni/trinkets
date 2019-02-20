@@ -1,0 +1,5 @@
+this is an example
+1 plus 1 is 2
+two plus 8 is 10
+ten plus 20 is 30
+nine times 30 is 270

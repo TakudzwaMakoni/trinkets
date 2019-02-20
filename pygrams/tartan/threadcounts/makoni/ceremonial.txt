@@ -1,0 +1,16 @@
+MB 20
+WW 24
+K 4
+WW 4
+K 4
+WW 4
+K 44
+TB 44
+K 3
+MB 10
+K 3
+TB 44
+K 44
+WW 44
+K 3
+GO 5 

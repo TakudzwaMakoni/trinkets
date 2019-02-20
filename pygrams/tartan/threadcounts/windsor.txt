@@ -1,0 +1,10 @@
+LN 8
+TK 12
+LN 8
+TK 8
+LN 4
+TK 88
+RB 16
+K 72
+RB 48
+DR 16

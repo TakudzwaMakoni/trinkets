@@ -1,0 +1,11 @@
+Services etc. (% of GDP)
+Exports of goods and services (% of GDP)
+Total Population
+Primary completion rate  (% of relevant age group)
+GDP (current US$)
+Imports of goods and services (% of GDP)
+Electric power consumption (kWh per capita)
+Energy use (kg of oil equivalent per capita)
+Inflation consumer prices (annual %)
+Mobile cellular subscriptions (per 100 people)
+Industry (% of GDP)

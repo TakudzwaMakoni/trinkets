@@ -17,3 +17,7 @@ bcplay(){
         mpv "https://$1.bandcamp.com/track/$2";
     fi
 }
+
+pg(){
+    python3 "${HOME}/.trinkets/pygrams/$1/main.py";
+}
