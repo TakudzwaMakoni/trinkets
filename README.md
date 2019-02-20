@@ -60,5 +60,7 @@ bndcmp [ARTIST] [ALBUM] #play bandcamp album with mpv, see bcplay for track. use
 
 bcplay [ARTIST] [TRACK]
 
+fndr [PATH] #open finder in PATH. can take no arguments to open finder in current directory.
+
 
  

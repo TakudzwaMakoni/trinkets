@@ -127,53 +127,53 @@ mpsyt "$1";
 
 setsc(){
 if grep -q ";$1:" ~/.trinkets/.shortcuts; then
-    PREDIR=$( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"; )
-    echo "$1 is already a shortcut for ${bold}$PREDIR${normal}";
-    while true; do
-	read -p "replace shortcut? " yn
-	case $yn in
-	    [Yy]* ) LINE=$( grep ";$1:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$2;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
-	    [Nn]* ) echo "did nothing."; break;;
-	    * ) echo "Please answer yes or no.";;
-	esac
-    done
+PREDIR=$( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"; )
+echo "$1 is already a shortcut for ${bold}$PREDIR${normal}";
+while true; do
+read -p "replace shortcut? " yn
+case $yn in
+[Yy]* ) LINE=$( grep ";$1:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$2;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
+[Nn]* ) echo "did nothing."; break;;
+* ) echo "Please answer yes or no.";;
+esac
+done
 else
-    if [ -d "$2" ]; then
-	if grep -q ":$2;" ~/.trinkets/.shortcuts; then
-	    PRESC=$( grep ":$2;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##" )
-	    echo "the directory ${bold}$2${normal} is already pointed to by ${bold}$PRESC${normal}";
-	    while true; do
-		read -p "use new shortcut to directory? " yn
-		case $yn in
-		    [Yy]* ) LINE=$( grep ":$2;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$2;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
-		    [Nn]* ) echo "did nothing."; break;;
-		    * ) echo "Please answer yes or no.";;
-		esac
-	    done
-	else
-	    echo ";$1:$2;" >> ~/.shortcuts
-	fi
-    elif [ "$2" == "" ]; then
-	if grep -q ":$PWD;" ~/.trinkets/.shortcuts; then
-	    PRESC=$( grep ":$PWD;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"  )
-            echo "the directory ${bold}$PWD${normal} is already pointed to by ${bold}$PRESC${normal}";
-            while true; do
-                read -p "use new shortcut to directory? " yn
-                case $yn in
-                    [Yy]* ) LINE=$( grep ":$PWD;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$PWD;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$PWD${normal}" ;break;;
-                    [Nn]* ) echo "did nothing."; break;;
-                    * ) echo "Please answer yes or no.";;
-                esac
-            done
-	else
-	    echo ";$1:$PWD;" >> ~/.trinkets/.shortcuts;
-	fi
-    else
-	echo "${bold}$2${normal} is not a directory.";
-    fi
+if [ -d "$2" ]; then
+if grep -q ":$2;" ~/.trinkets/.shortcuts; then
+PRESC=$( grep ":$2;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##" )
+echo "the directory ${bold}$2${normal} is already pointed to by ${bold}$PRESC${normal}";
+while true; do
+read -p "use new shortcut to directory? " yn
+case $yn in
+[Yy]* ) LINE=$( grep ":$2;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$2;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$2${normal}" ;break;;
+[Nn]* ) echo "did nothing."; break;;
+* ) echo "Please answer yes or no.";;
+esac
+done
+else
+echo ";$1:$2;" >> ~/.shortcuts
+fi
+elif [ "$2" == "" ]; then
+if grep -q ":$PWD;" ~/.trinkets/.shortcuts; then
+PRESC=$( grep ":$PWD;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"  )
+echo "the directory ${bold}$PWD${normal} is already pointed to by ${bold}$PRESC${normal}";
+while true; do
+read -p "use new shortcut to directory? " yn
+case $yn in
+[Yy]* ) LINE=$( grep ":$PWD;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$1:$PWD;#g" ~/.trinkets/.shortcuts ; echo "${bold}$1${normal} now points to ${bold}$PWD${normal}" ;break;;
+[Nn]* ) echo "did nothing."; break;;
+* ) echo "Please answer yes or no.";;
+esac
+done
+else
+echo ";$1:$PWD;" >> ~/.trinkets/.shortcuts;
+fi
+else
+echo "${bold}$2${normal} is not a directory.";
+fi
 fi
 }
 
 sc(){
-    cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
+cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
 }
