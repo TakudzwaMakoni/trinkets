@@ -4,9 +4,9 @@ prerequisites:
 
 - youtube-dl
 
-- shell integration with (imgcat)
+- OPTIONAL for iterm2 shell integration  (with imgcat)
 
-- mplayer
+- mplayer or mpv (mpv recommended)
 
 - iTerm2 is the recommended Terminal Application
 
@@ -23,7 +23,7 @@ youtube-dl --> https://github.com/rg3/youtube-dl/
 
 commands for iTerm2:
 
-- prof [PROFILE] # change the profile in the current window for iTerm2
+- prof [PROFILE] # change the profile in the current window (for iTerm2)
 - terminal-profile [PROFILE] # change the profile in the current window for Terminal app. (MacOS)
 
 - inv # inverts the profile colours
@@ -55,6 +55,10 @@ vplay [PATH/TO/VIDEO]
 setsc [SHORTCUT] [PATH TO DIRECTORY] #set shortcut name to a path to a directory. accessed using sc [SHORTCUT]
 
 sc [SHORTCUT] #cd shortcut to path specified by setsc.
+
+bndcmp [ARTIST] [ALBUM] #play bandcamp album with mpv, see bcplay for track. uses default artist with one arg
+
+bcplay [ARTIST] [TRACK]
 
 
  
