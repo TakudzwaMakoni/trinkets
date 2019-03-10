@@ -28,6 +28,9 @@ def modlist(filename, SorR, canvas_size):
 
     if os.path.isfile(filename) == False:
         filename = 'threadcounts/' + filename
+        directory_check = False
+    else:
+        directory_check = True
 
     count = getsett(filename)
     with open(filename) as f_object:
@@ -45,12 +48,12 @@ def modlist(filename, SorR, canvas_size):
             sett = halfsett + halfsett[::-1]
             for i in range( scale  // 2 ):
                 sett.extend(sett)
-            return sett, canvas_size
+            return sett, canvas_size, directory_check
         elif SorR == 'r':
             for i in range(scale):
                 halfsett.extend(halfsett)
             sett = halfsett
-            return sett, canvas_size
+            return sett, canvas_size, directory_check
         else:
             exit(1)
 
@@ -91,7 +94,7 @@ def diagonal( canvas, unit_length, offset, pixel_size, pixel ):
     canvas.paste(pixel, ( offset , unit_length + offset))
 
 
-def weaver(sett, pallet, canvas_size=1000,unit_length=1):
+def weaver(sett, pallet, canvas_size=1000,unit_length=1, directory_check=True):
     canvas = I.new('RGB', (canvas_size, canvas_size), 'white')
     threads = unpacksett(sett, pallet, unit_length)
     offset = 0
@@ -100,8 +103,11 @@ def weaver(sett, pallet, canvas_size=1000,unit_length=1):
         diagonal(canvas, unit_length, offset, i[1], i[2])
         offset += unit_length * i[1]
     gc.collect()
-    
-    canvas.save('patterns/'+ input('save as (png): ') + '.png')
+
+    if directory_check == False:
+        canvas.save('patterns/'+ input('save as (png): ') + '.png')
+    else:
+        canvas.save( input('save as (png): ') + '.png')
     canvas.show()
 
 

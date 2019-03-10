@@ -14,8 +14,8 @@ canvas_size0 = input('canvas size (pixels): ')
 unit_length = 1
 filename = input('threadcount file (txt): ') + '.txt'
 SorR = input('symmetric or repetitive (s/r): ')
-sett, canvas_size1 = t.modlist(filename,SorR, canvas_size0)
+sett, canvas_size1, directory_check = t.modlist(filename,SorR, canvas_size0)
 print('weaving...')
-t.weaver(sett, pallet, canvas_size1, unit_length)
+t.weaver(sett, pallet, canvas_size1, unit_length, directory_check)
 gc.collect()
 

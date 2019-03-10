@@ -1,0 +1,3 @@
+# for sorting lines of file ".shortcuts" in alphabetical order based on the second character in the line
+ALPHA = {'':00,}
+with open(file)

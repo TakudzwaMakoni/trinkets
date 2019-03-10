@@ -14,6 +14,10 @@ in terminal while in directory -> python3 main.py
 
 -> opt to save image (saved in patterns)
 
+prerequisites:
+
+PIL or pillow. "pip3 install pillow"
+
 
 colours codes for making threadcounts:
 

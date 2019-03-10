@@ -1,0 +1,16 @@
+;rdr:/Users/takudzwa/.trinkets/pygrams/reader;
+;ps:/Users/takudzwa/.trinkets/ps;
+;ss:/Users/takudzwa/.trinkets/ss;
+;pyg:/Users/takudzwa/.trinkets/pygrams;
+;dh:/Users/takudzwa/prg/cpp/dh;
+;tartan:/Users/takudzwa/prg/python/ff/tartan;
+;envir:/Users/takudzwa/environments;
+;tr:/Users/takudzwa/.trinkets;
+;bootc:/volumes/BOOTCAMP;
+;windc:/volumes/BOOTCAMP/users/takudzwa/desktop;
+;cpp:/Users/takudzwa/prg/cpp;
+;ff:/Users/takudzwa/prg/python/ff;
+;mpc:/Users/takudzwa/files/mpc;
+;sheinstar:/Users/takudzwa/prg/c*;
+;pdf:/Users/takudzwa/.trinkets/pygrams/reader/pdf;
+;lab:/Users/takudzwa/files/ap16145;

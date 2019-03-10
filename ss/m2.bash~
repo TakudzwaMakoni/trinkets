@@ -25,3 +25,6 @@ pg(){
 pysc(){
     python3 "${HOME}/.trinkets/ps/$1"
 }
+
+
+
