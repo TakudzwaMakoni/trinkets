@@ -23,8 +23,14 @@ pg(){
 }
 
 pysc(){
-    python3 "${HOME}/.trinkets/ps/$1"
+    set --  "${HOME}/.trinkets/ps/$1" "${@:2}"
+    python3 "$@"
 }
 
-
-
+pysc2(){
+    sortalg="radixsort.py"
+    I="$HOME/.trinkets/.shortcuts"
+    O="$HOME/.trinkets/ps/out.txt"
+    
+    pysc "$sortalg" "$I" "$O" 0
+}

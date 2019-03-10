@@ -23,5 +23,6 @@ pg(){
 }
 
 pysc(){
-    python3 "${HOME}/.trinkets/ps/$1"
+    set --  "${HOME}/.trinkets/ps/$1" "${@:2}"
+    python3 "$@"
 }

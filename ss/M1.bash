@@ -125,8 +125,13 @@ ytmusic(){
 mpsyt "$1";
 }
 
-setsc(){
 
+setsc(){
+    
+    sortalg="radixsort.py"
+    I="$HOME/.trinkets/.shortcuts"
+    O="$HOME/.trinkets/.shortcutsx"
+    
     if [ "$2" == "" ]; then
 	INDIR=$PWD
     elif [ -d "$2" ]; then
@@ -156,7 +161,7 @@ setsc(){
 	while true; do
 	    read -p "use new shortcut ${bold}$INSC${normal} to point to this directory? " yn
 	    case $yn in
-		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
+		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
 		[Nn]* ) echo "did nothing."; break;;
 		* ) echo "Please answer yes or no.";;
 	    esac
@@ -167,16 +172,41 @@ setsc(){
     	while true; do
    	    read -p "use this shortcut to point to new directory? " yn
        	    case $yn in
-            	[Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
+            	[Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ;
+			echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
             	[Nn]* ) echo "did nothing."; break;;
             	* ) echo "Please answer yes or no.";;
       	    esac
     	done
     else
-	echo ";$INSC:$INDIR;" >> ~/.trinkets/.shortcuts
+	echo ";$INSC:$INDIR;" >> ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" 
     fi
+    
+}
+
+remsc(){
+    I="$HOME/.trinkets/.shortcuts"
+    O="$HOME/.trinkets/.shortcutsx"
+    INSC=$1
+    PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" )
+    echo "are you sure you want to remove the relationship:" 
+    echo "${bold}$INSC${normal} -> ${bold}$PREDIR${normal}";
+        while true; do
+            read -p "y/n? " yn
+            case $yn in
+                [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE##g" ~/.trinkets/.shortcuts ;
+			awk '!NF {f=0; next} f {print ""; f=0} 1' ~/.trinkets/.shortcuts > "$O";mv "$O" "$I";
+			echo "relationship removed.";break;;
+                [Nn]* ) echo "did nothing."; break;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
 }
 
 sc(){
 cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
+}
+
+listsc(){
+    cat ~/.trinkets/.shortcuts;
 }
