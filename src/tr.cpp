@@ -35,16 +35,15 @@ int main(int argc, char **argv)
     
     string spc = " "; // space string for easier reading.
     string marginline = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"; // border
-    string title = "BESSIE" + spc;
-    string version = "1.0" + spc;
-    string repo = "dark-horse (c)" + spc;
-    string company = "Milli (c)" + spc;
-    string year = "2018" +spc;
-    string langauge = "C++11" +spc;
+    string title = "Trinkets" + spc;
+    string version = "3.0" + spc;
+    string repo = "" + spc;
+    string company = "Milli-Laboratory (c)" + spc;
+    string year = "2019" +spc;
+    string langauge = "C++, Python, Bourne-again Shell" +spc;
     string author = "Takudzwa Makoni" + spc;
     string git = "https://github.com/Makoni-Milli/" + spc;
-    string login = "afplay -v 0.075 ~/.trinkets/sounds/login.wav";
-
+    //string login = "afplay -v 0.075 ~/.trinkets/sounds/login.wav";
     /* string cmdlist = "osascript ~/trinkets/as/ocean.scpt;osascript ~/trinkets/as/redsands.scpt;osascript ~/trinkets/as/grass.scpt;osascript ~/trinkets/as/novel.scpt;osascript ~/trinkets/as/ocean.scpt;osascript ~/trinkets/as/redsands.scpt;osascript ~/trinkets/as/grass.scpt;osascript ~/trinkets/as/novel.scpt;osascript ~/trinkets/as/makoni.scpt;"; */
     
     // should redirect osacripts paths to OSX terminal directory.
@@ -57,7 +56,7 @@ int main(int argc, char **argv)
   
     ////////////////////////////////////
     
-    popen(login.c_str(),"r");
+    //popen(login.c_str(),"r");
     //popen(cmdlist.c_str(),"r"); not for the epileptic...
 
     

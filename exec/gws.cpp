@@ -30,8 +30,9 @@ int gws(){
     
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv)
 {
+    argv = 
     
     string spc = " "; // space string for easier reading.
     string marginline = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"; // border
@@ -73,9 +74,6 @@ int main(int argc, char* argv[])
     eol(3);
     pf(marginline,twref);
     eol(2); // padding
-    
-    
-    
     
     return 0;  // make sure your main returns int
 }

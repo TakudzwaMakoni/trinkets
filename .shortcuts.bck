@@ -2,6 +2,7 @@
 ;cpp:/Users/takudzwa/prg/cpp;
 ;dh:/Users/takudzwa/prg/cpp/dh;
 ;envir:/Users/takudzwa/environments;
+;executables:/Users/takudzwa/.trinkets/exec;
 ;ff:/Users/takudzwa/prg/python/ff;
 ;lab:/Users/takudzwa/files/ap16145;
 ;mpc:/Users/takudzwa/files/mpc;
@@ -9,7 +10,6 @@
 ;ps:/Users/takudzwa/.trinkets/ps;
 ;pyg:/Users/takudzwa/.trinkets/pygrams;
 ;rdr:/Users/takudzwa/.trinkets/pygrams/reader;
-;sb:/Users/takudzwa/sandbox;
 ;sheinstar:/Users/takudzwa/prg/c*;
 ;ss:/Users/takudzwa/.trinkets/ss;
 ;tartan:/Users/takudzwa/prg/python/ff/tartan;
