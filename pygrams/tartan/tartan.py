@@ -41,7 +41,7 @@ def modlist(filename, SorR, canvas_size):
     count = getsett(filename)
     with open(filename) as f_object:
 
-        if canvas_size == 'sett':
+        if int(canvas_size) == 0:
             canvas_size = count
         else:
             canvas_size = int(canvas_size)
