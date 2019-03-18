@@ -4,22 +4,31 @@ import subprocess, os, gc, math
 
 pallet = {'HG':'#285800','K':'#101010','R':'#C80000','W':'#E0E0E0','Y':'#E8C000', 'LN':'#C0C0C0','TK':'#8C7038','RB':'#0C585C','DR':'#880000','GO':'#FFD700','MB':'#3474FC','RC':'#5C5C5C','BB':'#14283C','EG':'#004028','DB':'#202060','DGR':'#003C14','RSB':'#1C0070','WW':'#FCFCFC','MU':'#D09800','G':'#006818','YT':'#D8B000','NB':'#5C4827','WB':'#5D432C','THB':'#32282B','KCO':'#252321','BRG':'#004225','CHA':'#F7E7CE','TB':'#1375A1'}
 
-manual = { "canv":(5,10), "path":(15,25) }
+manual = { "canv":(25,26), "path":(16,23), "pattern":(64,65), "colour":(32,62), "thread":(28,30), "section":(6,14) }
+
 
 def help(params, manual=manual):
     try:
         ref = params.split()[1]
-        snippet = manual[ref]
+        start, stop = manual[ref]
+        padding = int(subprocess.run(['tput', 'cols'], stdout=subprocess.PIPE).stdout.decode('utf-8').strip('\n'))
+        border = ' *' * int( 1/4 * padding)
+        print( '\n', ' '*( (padding-len(border)) // 2) + border ,'\n' )
+        print('MAN'+ref)
         with open(os.path.expanduser("~/.trinkets/pygrams/tartan/.help")) as f:
-            manpage = f.readlines()[ snippet[0]:snippet[1] ]
+            manpage = f.readlines()[ start:stop ]
             for line in manpage:
-                print(line.strip("\n"))
+                print(line,end="")
+        print( '\n', ' '*( (padding-len(border)) // 2) + border ,'\n' )
     except:
+        padding = int(subprocess.run(['tput', 'cols'], stdout=subprocess.PIPE).stdout.decode('utf-8').strip('\n'))
+        border = '* ' * int( 1/4 * padding)
+        print( '\n', ' '*( (padding-len(border)) // 2) + border ,'\n' )
         print('MAN0')
         with open(os.path.expanduser("~/.trinkets/pygrams/tartan/.help")) as f:
             for line in f:
                 print(line.strip("\n"))
-
+        print( '\n', ' '*( (padding-len(border)) // 2) + border ,'\n' )
 def getsett(filename):
     with open(filename) as f:
         lines = f.readlines()

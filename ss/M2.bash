@@ -39,7 +39,3 @@ pysc(){
     set --  "${HOME}/.trinkets/ps/$1" "${@:2}"
     python3 "$@"
 }
-
-trinketman(){
-    cat "$1/.help"
-}
