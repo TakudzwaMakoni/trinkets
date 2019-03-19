@@ -1,9 +1,6 @@
 import Airhead as A
 
 
-
-A.bessie()
-
 def main():
     
     ##

@@ -1,3 +1,4 @@
+;airhead:airhead;
 ;bootc:/volumes/BOOTCAMP;
 ;cpp:/Users/takudzwa/prg/cpp;
 ;dh:/Users/takudzwa/prg/cpp/dh;
@@ -12,5 +13,5 @@
 ;rdr:/Users/takudzwa/.trinkets/pygrams/reader;
 ;sheinstar:/Users/takudzwa/prg/c*;
 ;ss:/Users/takudzwa/.trinkets/ss;
-;tartan:/Users/takudzwa/prg/python/ff/tartan;
+;tartan:/Users/takudzwa/.trinkets/pygrams/tartan;
 ;tr:/Users/takudzwa/.trinkets;
