@@ -32,7 +32,6 @@ int gws(){
 
 int main(int argc, char* argv)
 {
-    argv = 
     
     string spc = " "; // space string for easier reading.
     string marginline = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"; // border

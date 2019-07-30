@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 
 pr(){ . ~/.bashrc; }
@@ -24,7 +24,7 @@ echo "";
 fndr(){
 if [ -d "$1" ]; then
 open "$1";
-elif [ "$1" "==" ""  ]; then
+elif [ "$1" == ""  ]; then
 open "$PWD";
 else
 echo "${bold}$1${normal} is not a directory"

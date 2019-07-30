@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 yt_filename(){
 youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ has already been downloaded//;s/ and merged// ; s/ //;'
@@ -7,10 +7,10 @@ youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ 
 ytsave(){
 OLD=$(yt_filename "$2");
 NEW=$1;
-if [ -d "$NEW" ]; then
+if [  -d "$NEW"  ]; then
 echo "${bold}$NEW${normal} is already a directory.";
 echo "file saved in working directory as ${bold}$OLD${normal}.";
-elif [ -f "$NEW" ]; then
+elif [  -f "$NEW"  ]; then
 echo "${bold}$NEW${normal} is already a file.";
 echo "file saved in working directory as ${bold}$OLD${normal}.";
 else
@@ -132,7 +132,7 @@ setsc(){
     I="$HOME/.trinkets/.shortcuts"
     O="$HOME/.trinkets/.shortcutsx"
     
-    if [ "$2" "==" "" ]; then
+    if [ "$2" == "" ]; then
 	INDIR=$PWD
     elif [ -d "$2" ]; then
 	INDIR=$2
@@ -143,37 +143,34 @@ setsc(){
 
     INSC=$1
 
-    if grep --silent ";$INSC:" ~/.trinkets/.shortcuts && grep -q ":$INDIR;" ~/.trinkets/.shortcuts; then
+    if grep -q ";$INSC:" ~/.trinkets/.shortcuts && grep -q ":$INDIR;" ~/.trinkets/.shortcuts; then
 	PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##"; )
 	PRESC=$( grep ":$INDIR;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"; )
 	
-	if [[ "$INDIR" == "$PREDIR" && "$INSC" == "$PRESC" ]] ; then
+	if [[ "$INDIR" = "$PREDIR" && "$INSC" = "$PRESC" ]] ; then
 	    echo "relationship already exists!"
 	else
 	    echo "conflict:"
 	    echo "${bold}$INSC${normal} is already a shortcut for ${bold}$PREDIR${normal} and";
-	    echo "${bold}$INDIR${normal} is already pointed to by ${bold}$PRESC${normal}";
+	    echo "${bold}$INDIR${normal} is already pointed to by for ${bold}$PRESC${normal}";
 	    echo "you need to replace either shortcut or path individually, or remove relations with remsc."
 	fi
-    elif grep --silent ":$INDIR;" ~/.trinkets/.shortcuts; then
+    elif grep -q ":$INDIR;" ~/.trinkets/.shortcuts; then
 	PRESC=$( grep ":$INDIR;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##" )
 	echo "the directory ${bold}$INDIR${normal} is already pointed to by ${bold}$PRESC${normal}";
 	while true; do
-	    echo "use new shortcut ${bold}$INSC${normal} to point to this directory? "
-	    read yn
+	    read -p "use new shortcut ${bold}$INSC${normal} to point to this directory? " yn
 	    case $yn in
 		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
 		[Nn]* ) echo "did nothing."; break;;
 		* ) echo "Please answer yes or no.";;
 	    esac
 	done
-    elif grep --silent ";$INSC:" ~/.trinkets/.shortcuts; then
+    elif grep -q ";$INSC:" ~/.trinkets/.shortcuts; then
 	PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" )
     	echo "the shortcut ${bold}$INSC${normal} already refers to ${bold}$PREDIR${normal}";
     	while true; do
-   	    echo "use this shortcut to point to new directory? "
-	    echo "y/n? "
-	    read yn
+   	    read -p "use this shortcut to point to new directory? " yn
        	    case $yn in
             	[Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ;
 			echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
@@ -193,10 +190,9 @@ remsc(){
     INSC=$1
     PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" )
     echo "are you sure you want to remove the relationship:" 
-    echo "${bold}$INSC${normal} -> ${bold}$PREDIR${normal}"
-    echo "y/n? "
-    while true; do
-            read yn;
+    echo "${bold}$INSC${normal} -> ${bold}$PREDIR${normal}";
+        while true; do
+            read -p "y/n? " yn
             case $yn in
                 [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE##g" ~/.trinkets/.shortcuts ;
 			awk '!NF {f=0; next} f {print ""; f=0} 1' ~/.trinkets/.shortcuts > "$O";mv "$O" "$I";

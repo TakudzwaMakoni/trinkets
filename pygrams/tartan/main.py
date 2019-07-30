@@ -15,7 +15,7 @@ while not str.isdigit(canvas_size0):
         print('error: canvas size must be an integer.')
         canvas_size0 = input('canvas size (pixels): ')
 
-filename = input('path to threadcount file (txt): ')
+filename = input('path to threadcount file [ext]: ')
 if filename[0] == "~":
     filename = os.path.expanduser(filename)
 
@@ -25,12 +25,12 @@ while not os.path.isfile(filename):
         print('test')
     elif filename[0:2] == '.h':
         t.help(filename)
-        filename = input('path to threadcount file (txt): ')
+        filename = input('path to threadcount file [ext]: ')
         if filename[0] == "~":
             filename = os.path.expanduser(filename)
     else:
         print('error: no such file found.')
-        filename = input('path to threadcount file (txt): ')
+        filename = input('path to threadcount file [ext]: ')
         if filename[0] == "~":
             filename = os.path.expanduser(filename)
 
