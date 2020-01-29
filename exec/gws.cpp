@@ -12,7 +12,7 @@ using namespace std;
 
 void eol(int v=1){ // print end of line to terminal
     for (int i=0; i<v; i++){
-        cout << endl;
+       cout << "\n";
     }
 }
 void pf(string str, int winwidth){ // print formatted
@@ -21,7 +21,7 @@ void pf(string str, int winwidth){ // print formatted
     cout << setw(widthA) << right << str;
 }
 
-int gws(){
+int getWinSize(){
     
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -30,49 +30,47 @@ int gws(){
     
 }
 
-int main(int argc, char* argv)
+int main(int argc, char** argv)
 {
     
     string spc = " "; // space string for easier reading.
     string marginline = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"; // border
-    string title = argv[1] + spc;
-    string version = argv[2] + spc;
-    string repo = argv[3] + spc;
-    string company = argv[4] + spc;
-    string year = argv[5] + spc;
-    string langauge = argv[6] +spc;
-    string author = argv[7] + spc;
-    string git = argv[8] + spc;
-    string login = "afplay -v 0.075 ~/.trinkets/sounds/login.wav";
-    /* string cmdlist = "osascript ~/trinkets/as/ocean.scpt;osascript ~/trinkets/as/redsands.scpt;osascript ~/trinkets/as/grass.scpt;osascript ~/trinkets/as/novel.scpt;osascript ~/trinkets/as/ocean.scpt;osascript ~/trinkets/as/redsands.scpt;osascript ~/trinkets/as/grass.scpt;osascript ~/trinkets/as/novel.scpt;osascript ~/trinkets/as/makoni.scpt;"; */
-    
-    // should redirect osacripts paths to OSX terminal directory.
-    
-    int w = gws(); // window
-    int* wptr = &w; // pointer to memory address of intger w.
-    int& twref = *wptr; // reference assigned to value at memory address w.
-    
+   
+    string title;
+    string version;
+    string repo;
+    string company;
+    string year;
+    string language;
+    string author;
+    string git;
 
-  
-    ////////////////////////////////////
+    if(argc<1){
+    title = argv[1] + spc;
+    version = argv[2] + spc;
+    repo = argv[3] + spc;
+    company = argv[4] + spc;
+    year = argv[5] + spc;
+    language = argv[6] +spc;
+    author = argv[7] + spc;
+    git = argv[8] + spc;
+    }
     
-    popen(login.c_str(),"r");
-    //popen(cmdlist.c_str(),"r"); not for the epileptic...
-
+    int w = getWinSize(); // window
     
     eol(2); // padding
-    pf(marginline, twref); //
+    pf(marginline, w); //
     eol(3);
-    pf(title + "v" + version + ", " + repo, twref);
+    pf(title + "v" + version + ", " + repo, w);
     eol();
-    pf(company + year + ", " + "written in " + langauge, twref);
+    pf(company + year + ", " + "written in " + language, w);
     eol(2);
-    pf("by " + author, twref);
+    pf("by " + author, w);
     eol();
-    pf("git: " + git,twref);
+    pf("git: " + git, w);
     eol(3);
-    pf(marginline,twref);
+    pf(marginline, w);
     eol(2); // padding
     
-    return 0;  // make sure your main returns int
+    return 0; 
 }

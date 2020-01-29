@@ -1,4 +1,4 @@
-#!/bin/bassh
+#!/bin/bash
 
 bndcmp(){
     DEF=$( grep "~bndcmp:" ~/.trinkets/.defaults | cut -d":" -f 2 )

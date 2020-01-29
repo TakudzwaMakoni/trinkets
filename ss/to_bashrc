@@ -5,9 +5,9 @@ echo "FROM ${bold}BASHRC${normal}"
 PS1="\@ | \u | \W   ▶  "
 PS2="continue  ▶  "
 
-PATH="$PATH:~/trinkets/apples"
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+test -e "${HOME}/dev/.trinkets/ss/M0.bash" && source "${HOME}/dev/.trinkets/ss/M0.bash"
+test -e "${HOME}/dev/.trinkets/ss/M1.bash" && source "${HOME}/dev/.trinkets/ss/M1.bash"
+test -e "${HOME}/dev/.trinkets/ss/M2.bash" && source "${HOME}/dev/.trinkets/ss/M2.bash"
 
 prof(){
     echo -n -e "\033]50;SetProfile=$1\x7"

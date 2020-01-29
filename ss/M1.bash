@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 yt_filename(){
 youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ has already been downloaded//;s/ and merged// ; s/ //;'
