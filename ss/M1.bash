@@ -1,54 +1,6 @@
-!/bin/bash
+#!/bin/bash
 
-yt_filename(){
-youtube-dl $1 | grep .mp4 | sed 's/[][]//g; s/Destination: //; s/download//; s/ has already been downloaded//;s/ and merged// ; s/ //;'
-}
-
-ytsave(){
-OLD=$(yt_filename "$2");
-NEW=$1;
-if [ -d "$NEW" ]; then
-echo "${bold}$NEW${normal} is already a directory.";
-echo "file saved in working directory as ${bold}$OLD${normal}.";
-elif [ -f "$NEW" ]; then
-echo "${bold}$NEW${normal} is already a file.";
-echo "file saved in working directory as ${bold}$OLD${normal}.";
-else
-mv "$OLD" "$NEW";
-echo "file saved in working directory as ${bold}$NEW${normal}."
-fi
-}
-
-ytplay(){
-if [ $# -eq 2 ]; then
-OLD=$(yt_filename "$2");
-NEW=$1;
-if [  -d "$NEW"  ]; then
-echo "${bold}$NEW${normal} is already a directory.";
-echo "file saved in working directory as ${bold}$OLD${normal}.";
-mpv "$OLD";
-elif [  -f "$NEW"  ]; then
-echo "${bold}$NEW${normal} is already a file.";
-echo "file saved in working directory as ${bold}$OLD${normal}.";
-mpv "$OLD";
-else
-mv "$OLD" "$NEW";
-echo "file saved in working directory as ${bold}$NEW${normal}."
-mpv "$NEW";
-fi
-else
-VFILE=$(yt_filename "$1");
-mv "$VFILE" "~~temp~~"
-mpv "~~temp~~";
-fi
-}
-
-vplay(){
-osascript -e [ tell application "iTerm2" create window with default profile end tell ]
-mpv $1;
-}
-
-start(){
+create(){
 if [ $# -eq 1 ]; then
 if [  -d "$1"  ]; then
 echo "${bold}$1${normal} already exists.";
@@ -121,11 +73,6 @@ sb(){
 cd ~/sandbox;
 }
 
-ytmusic(){
-mpsyt "$1";
-}
-
-
 setsc(){
     
     sortalg="radixsort.py"
@@ -162,7 +109,7 @@ setsc(){
 	    echo "use new shortcut ${bold}$INSC${normal} to point to this directory? "
 	    read yn
 	    case $yn in
-		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
+		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i .bck  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
 		[Nn]* ) echo "did nothing."; break;;
 		* ) echo "Please answer yes or no.";;
 	    esac
@@ -198,7 +145,7 @@ remsc(){
     while true; do
             read yn;
             case $yn in
-                [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE##g" ~/.trinkets/.shortcuts ;
+                [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i .bck "s#$LINE##g" ~/.trinkets/.shortcuts ;
 			awk '!NF {f=0; next} f {print ""; f=0} 1' ~/.trinkets/.shortcuts > "$O";mv "$O" "$I";
 			echo "relationship removed.";break;;
                 [Nn]* ) echo "did nothing."; break;;
@@ -216,5 +163,3 @@ listsc(){
 
 
 }
-
-echo "${bold}M1${normal}  successfully imported."

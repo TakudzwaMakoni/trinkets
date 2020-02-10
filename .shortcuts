@@ -1,8 +1,4 @@
-;aur:/home/takudzwa/AUR;
-;blackos:/home/takudzwa/dev/BlackOS;
-;dev:/home/takudzwa/dev;
 ;display:/home/takudzwa/dev/BlackOSDev/Framework/Display;
-;fromsrc:/home/takudzwa/fromsrc;
-;k-src:/home/takudzwa/dev/BlackOS/Framework/Display/src;
-;k-unit:/home/takudzwa/dev/BlackOS/Framework/Display/unit_tests;
-;tr:/home/takudzwa/.trinkets;
+;pygrams:pygrams;
+;sur:/home/takudzwa/AUR;
+;trinkets:/home/takudzwa/.trinkets;

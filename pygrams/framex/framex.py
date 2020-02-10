@@ -1,9 +1,7 @@
-def get_modules():
-    import numpy as np
-    import matplotlib.pyplot as p
-    from matplotlib.animation import FuncAnimation
-    print('imported.')
-get_modules()
+# framex (c) By Takudzwa 2019
+import numpy as np
+import matplotlib.pyplot as p
+from matplotlib.animation import FuncAnimation
 # from IPython.display import clear_output
 
 '''constants and trig functions'''

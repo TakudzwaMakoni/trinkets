@@ -2,7 +2,7 @@
 import tartan as t
 import gc, os, subprocess
 
-print("info: .h for help, .q to quit.\n")
+print("info: .h for help, .q to quit.")
 
 canvas_size0 = input('canvas size (pixels): ')
 while not str.isdigit(canvas_size0):
@@ -35,7 +35,7 @@ while not os.path.isfile(filename):
             filename = os.path.expanduser(filename)
 
 SorR = input('symmetric or repetitive pattern (s/r): ')
-while SorR is not 'r' and SorR is not 's':
+while SorR != 'r' and SorR != 's':
     if SorR == '.q':
         exit(0)
     elif SorR[0:2] == '.h':

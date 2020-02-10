@@ -1,9 +1,0 @@
-source "${HOME}/.trinkets/ss/M0.bash"
-source "${HOME}/.trinkets/ss/M1.bash"
-bold=$(tput bold)
-normal=$(tput sgr0)
-echo "FROM ${bold}BASHRC${normal}"
-PS1="\@ | \u | \W   ▶  "
-PS2="continue  ▶  "
-PATH="$PATH:~/.trinkets/apples"
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

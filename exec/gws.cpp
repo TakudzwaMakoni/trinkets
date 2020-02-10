@@ -45,7 +45,7 @@ int main(int argc, char** argv)
     string author;
     string git;
 
-    if(argc<1){
+    if(argc>1){
     title = argv[1] + spc;
     version = argv[2] + spc;
     repo = argv[3] + spc;
@@ -58,9 +58,8 @@ int main(int argc, char** argv)
     
     int w = getWinSize(); // window
     
-    eol(2); // padding
     pf(marginline, w); //
-    eol(3);
+    eol(2);
     pf(title + "v" + version + ", " + repo, w);
     eol();
     pf(company + year + ", " + "written in " + language, w);
@@ -68,9 +67,9 @@ int main(int argc, char** argv)
     pf("by " + author, w);
     eol();
     pf("git: " + git, w);
-    eol(3);
+    eol(2);
     pf(marginline, w);
-    eol(2); // padding
+    eol(1); // padding
     
     return 0; 
 }
