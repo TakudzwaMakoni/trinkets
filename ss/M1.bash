@@ -109,7 +109,7 @@ setsc(){
 	    echo "use new shortcut ${bold}$INSC${normal} to point to this directory? "
 	    read yn
 	    case $yn in
-		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i .bck  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
+		[Yy]* ) LINE=$( grep ":$INDIR;" ~/.trinkets/.shortcuts ); sed -i.bak  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ; echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
 		[Nn]* ) echo "did nothing."; break;;
 		* ) echo "Please answer yes or no.";;
 	    esac
@@ -122,7 +122,7 @@ setsc(){
 	    echo "y/n? "
 	    read yn
        	    case $yn in
-            	[Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i ".bck"  "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ;
+            	[Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i.bak "s#$LINE#;$INSC:$INDIR;#g" ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" ;
 			echo "${bold}$INSC${normal} now points to ${bold}$INDIR${normal}" ;break;;
             	[Nn]* ) echo "did nothing."; break;;
             	* ) echo "Please answer yes or no.";;
@@ -145,7 +145,7 @@ remsc(){
     while true; do
             read yn;
             case $yn in
-                [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i .bck "s#$LINE##g" ~/.trinkets/.shortcuts ;
+                [Yy]* ) LINE=$( grep ";$INSC:" ~/.trinkets/.shortcuts ); sed -i.bck "s#$LINE##g" ~/.trinkets/.shortcuts ;
 			awk '!NF {f=0; next} f {print ""; f=0} 1' ~/.trinkets/.shortcuts > "$O";mv "$O" "$I";
 			echo "relationship removed.";break;;
                 [Nn]* ) echo "did nothing."; break;;
@@ -160,6 +160,4 @@ cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
 
 listsc(){
     cat ~/.trinkets/.shortcuts;
-
-
 }
