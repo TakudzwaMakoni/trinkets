@@ -2,6 +2,10 @@
 
 pr(){ . ~/.bashrc; }
 
+refresh(){
+reset && pr
+}
+
 inv(){
 printf "\e[?5h"
 }

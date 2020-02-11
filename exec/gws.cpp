@@ -6,6 +6,8 @@
 #include <string>
 #include <iomanip>
 #include <stdlib.h>
+#include <vector>
+#include <cmath>
 #define arraysize(ar)  (sizeof(ar) / sizeof(ar[0]))
 
 using namespace std;
@@ -21,13 +23,19 @@ void pf(string str, int winwidth){ // print formatted
     cout << setw(widthA) << right << str;
 }
 
-int getWinSize(){
+vector<int> winSz(){
     
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    int siz [2] = {w.ws_row, w.ws_col};
-    return siz[1];
-    
+    vector<int> siz = {w.ws_row, w.ws_col};
+    return siz;    
+}
+
+void pushDown(int rows){
+size_t correction = abs(rows - 8 /*average desirable value*/) / 2;
+for(int i = 0; i < correction ; ++i){
+eol();
+}
 }
 
 int main(int argc, char** argv)
@@ -56,20 +64,26 @@ int main(int argc, char** argv)
     git = argv[8] + spc;
     }
     
-    int w = getWinSize(); // window
-    
-    pf(marginline, w); //
+    vector<int> sz = winSz(); // window
+    int x = sz[1];
+    int y = sz[0];
+	
+    pushDown(y);
+    pf(marginline, x); //
     eol(2);
-    pf(title + "v" + version + ", " + repo, w);
+    pf(title + "v" + version + ", " + repo, x);
     eol();
-    pf(company + year + ", " + "written in " + language, w);
+    pf(company + year + ", " + "written in " + language, x);
     eol(2);
-    pf("by " + author, w);
+    pf("by " + author, x);
     eol();
-    pf("git: " + git, w);
+    pf("git: " + git, x);
     eol(2);
-    pf(marginline, w);
-    eol(1); // padding
+    pf(marginline, x);
+    eol(2); // padding
+   
+   // moves cursor back to top
+   // printf("\033[0;0H");
     
     return 0; 
 }
