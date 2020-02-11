@@ -19,6 +19,7 @@ fi
 
 pg(){
 	aboutfile="${HOME}/.trinkets/pygrams/$1/.about"
+	clear
 	about $aboutfile
     	python3 "${HOME}/.trinkets/pygrams/$1/main.py"
 }

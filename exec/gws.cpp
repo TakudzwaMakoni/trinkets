@@ -68,6 +68,7 @@ int main(int argc, char** argv)
     int x = sz[1];
     int y = sz[0];
 	
+    printf("\033[0;0H");
     pushDown(y);
     pf(marginline, x); //
     eol(2);
@@ -83,7 +84,6 @@ int main(int argc, char** argv)
     eol(2); // padding
    
    // moves cursor back to top
-   // printf("\033[0;0H");
     
     return 0; 
 }
