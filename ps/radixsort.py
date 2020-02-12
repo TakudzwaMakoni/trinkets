@@ -1,3 +1,4 @@
+# radixsort by Takudzwa makoni 2019
 # for sorting lines of file ".shortcuts" in alphabetical order based on the second character in the line
 
 import sys, array as arr
@@ -8,10 +9,6 @@ ALPHA = {'_':25,'-':25,'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7,'i':8,'j'
 
 n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19,n20,n21,n22,n23,n24,n25, = [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]
 bin =[n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19,n20,n21,n22,n23,n24,n25]
-
-
-
-
 
 def reorder(oldorderlines, unpack):
     return [ oldorderlines[i] for i in unpack ]
@@ -73,7 +70,7 @@ lineorder = global_radix_sort(v,initchar,padfactor - 1,False)
 f = open(outputfile,'w')
 f2 = open(inputfile)
 lines = f2.readlines()
-f2.close
+f2.close()
 
 
 for i in lineorder:

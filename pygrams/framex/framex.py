@@ -40,17 +40,17 @@ def newV(ket,ProjectionMatrices=(PROJI,PROJJ,PROJK)):
     Output: set of vectors describing the function in the given basis
     using newV function.'''
 def newB(x,y,z,point_density,B=(ket_i,ket_j,ket_k)):
-    
+
     k_i, k_j, k_k = B
-    
+
     b_i = np.conjugate( np.transpose(k_i) )
     b_j = np.conjugate( np.transpose(k_j) )
     b_k = np.conjugate( np.transpose(k_k) )
-    
+
     PI = (k_i @ b_i) / (b_i @ k_i)[0][0]
     PJ = (k_j @ b_j) / (b_j @ k_j)[0][0]
     PK = (k_k @ b_k) / (b_k @ k_k)[0][0]
-    
+
     return np.array([newV(np.array([[x[i]],[y[i]],[z[i]]]), (PI,PJ,PK)) for i in range(point_density) ])
 
 
@@ -84,26 +84,25 @@ def updateframex(stack,Alpha,Beta,Gamma,point_density):
     return newstack[:,0], newstack[:,1], newstack[:,2]
 
 def newBx(x,y,z,point_density,B=(ket_i,ket_j,ket_k)):
-    
+
     k_i, k_j, k_k = B
-    
+
     b_i = np.conjugate( np.transpose(k_i) )
     b_j = np.conjugate( np.transpose(k_j) )
     b_k = np.conjugate( np.transpose(k_k) )
-    
+
     PI = (k_i @ b_i) / (b_i @ k_i)[0][0]
     PJ = (k_j @ b_j) / (b_j @ k_j)[0][0]
     PK = (k_k @ b_k) / (b_k @ k_k)[0][0]
-    
+
     return np.array([newV(np.array([[x[i]],[y[i]],[z[i]]]), (PI,PJ,PK)) for i in range(point_density**2) ])
 
 
 def ex_cube():
-    
+
     point_density = 29 # must equal number of datapoints so keep this at 29.
 
     l = 5 #length of sides
-
 
     # each letter is a vector from the origin mapping to a vertex.
     A = np.array([-l,+l,+l])
@@ -115,9 +114,6 @@ def ex_cube():
     G = np.array([-l,-l,-l])
     H = np.array([+l,+l,+l])
 
-  
-
-  
     data = np.array([A,B,C,H,A,F,E,D,G,F,E,H,A,F,E,D,C,H,E,D,C,B,G,D,C,B,A,F,G,B])
 
     x = data[:,0]
@@ -127,29 +123,40 @@ def ex_cube():
     cube_stack = set_stack( newB(x,y,z,point_density) )
     x1, y1, z1 = cube_stack[:,0], cube_stack[:,1], cube_stack[:,2]
 
-
-
     fig, ax = p.subplots()
     line, = ax.plot(x, z,'w-o')
     ax.set_facecolor('#000000') #black background
 
     def frame(i):
-    
+
         newdata = updateframe(cube_stack, 0.1 * i, 0.1 * i, 0.1 * i,point_density) # apply the rotation matrix transformation.
         line.set_data(newdata[0] - 0.5*l, newdata[2] -  0.5*l) # modified to fix rotation at centre of square.
         ax.figure.canvas.draw()
         return line,
 
     ani = FuncAnimation(fig, frame, 1000, init_func=None,interval=10, blit=False)
-    
+
+    figManager = p.get_current_fig_manager()
+    if p.get_backend() == 'Qt5Agg':
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using Qt5Agg backend")
+        figManager.window.showMaximized()
+    elif p.get_backend() == "wx":
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using wx backend")
+        figManager.frame.Maximize(True)
+
+
     p.ylim(-13,13)
     p.xlim(-13,13)
     #p.grid() # no grid now!
     p.show()
-    
+
 
 def ex_f1():
-    
+
     point_density = 50
 
     x = np.linspace(-50,50,point_density)
@@ -176,7 +183,7 @@ def ex_f1():
 
 
     def frame(i):
-    
+
         newdata = updateframex(function_1_stack, 0.0 * i, 0.0 * i, 0.05 * i,point_density)
         line.set_data(newdata[0], newdata[2])
         ax.figure.canvas.draw()
@@ -184,7 +191,17 @@ def ex_f1():
 
     ani = FuncAnimation(fig, frame, 1000, init_func=None, interval=10, blit=False )
 
-
+    figManager = p.get_current_fig_manager()
+    if p.get_backend() == 'Qt5Agg':
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using Qt5Agg backend")
+        figManager.window.showMaximized()
+    elif p.get_backend() == "wx":
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using wx backend")
+        figManager.frame.Maximize(True)
 
     p.ylim(-250000,250000)
     p.xlim(-70,70)
@@ -207,7 +224,6 @@ def ex_f2():
 
     v_set =  np.array([ [  i, j, data_matrix[i,j] ] for j in range(point_density) for i in range(point_density) ]  )
 
-
     x = v_set[:,0]
     y = v_set[:,1]
     z = v_set[:,2]
@@ -215,14 +231,12 @@ def ex_f2():
     # pass it into newBx to convert to the desired basis set
     function_2_stack = set_stack(newBx(x,y,z,point_density))
 
-
-
     fig, ax = p.subplots()
     line, = ax.plot(x,z, 'b.')
 
 
     def frame(i):
-    
+
         newdata = updateframex(function_2_stack, 0.0 * i, 0.0 * i, 0.05 * i,point_density)
         line.set_data(newdata[0] - newdata[0][ np.where(z==min(z))[0][0] ] , newdata[2]) # modification to fix rotation about minimum
         ax.figure.canvas.draw()
@@ -230,7 +244,17 @@ def ex_f2():
 
     ani = FuncAnimation(fig, frame, 1000, init_func=None, interval=10, blit=False )
 
-
+    figManager = p.get_current_fig_manager()
+    if p.get_backend() == 'Qt5Agg':
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using Qt5Agg backend")
+        figManager.window.showMaximized()
+    elif p.get_backend() == "wx":
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using wx backend")
+        figManager.frame.Maximize(True)
 
     p.ylim(-100,1500)
     p.xlim(-40,40)
@@ -278,14 +302,26 @@ def ex_param():
     ax.set_facecolor('#000000') #black background
 
     def frame(i):
-        
+
         newdata = updateframex(torus_stack, 0.05 * i, 0.1 * i, 0.1 * i,point_density)
         line.set_data(newdata[0], newdata[2])
         ax.figure.canvas.draw()
-        
+
         return line,
 
     ani = FuncAnimation(fig, frame, 1000, init_func=None,interval=10, blit=False )
+
+    figManager = p.get_current_fig_manager()
+    if p.get_backend() == 'Qt5Agg':
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using Qt5Agg backend")
+        figManager.window.showMaximized()
+    elif p.get_backend() == "wx":
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using wx backend")
+        figManager.frame.Maximize(True)
 
     p.ylim(-1,1)
     p.xlim(-2,2)
@@ -297,39 +333,49 @@ def z(f,xmin,xmax,ymin,ymax,density,linestyle,withgrid,background='#ffffff'):
 
     x = np.linspace(xmin-5,xmax+5,density)
     y = np.linspace(ymin-5,ymax+5,density)
-    
-    
+
+
     data_matrix = np.array([ [f(i,j) for j in y] for i in x])
-    
+
     v_set =  np.array([ [  i, j, data_matrix[i,j] ] for j in range(density) for i in range(density) ]  )
-    
+
     x = v_set[:,0]
     y = v_set[:,1]
     z = v_set[:,2]
-    
+
     # pass it into newBx to convert to the desired basis set
     function_2_stack = set_stack(newBx(x,y,z,density))
-    
-    
-    
+
+
+
     fig, ax = p.subplots()
     line, = ax.plot(x,z, linestyle)
     ax.set_facecolor(background)
-    
+
     def frame(i):
-        
+
         newdata = updateframex(function_2_stack, 0.0 * i, 0.0 * i, 0.05 * i,density)
         line.set_data(newdata[0] - newdata[0][ np.where(z==min(z))[0][0] ] , newdata[2]) # modification to fix rotation about minimum
         ax.figure.canvas.draw()
         return line,
-    
+
     ani = FuncAnimation(fig, frame, 1000, init_func=None, interval=10, blit=False )
-    
-    
-    
+
+
+    figManager = p.get_current_fig_manager()
+    if p.get_backend() == 'Qt5Agg':
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using Qt5Agg backend")
+        figManager.window.showMaximized()
+    elif p.get_backend() == "wx":
+        p.rcParams['toolbar'] = 'None' # Remove tool bar (upper)
+        fig.canvas.window().statusBar().setVisible(False) # Remove status bar (bottom)
+        print("using wx backend")
+        figManager.frame.Maximize(True)
+
     p.ylim(-100,1500)
     p.xlim(-40,40)
     if withgrid is True:
         p.grid()
     p.show()
-

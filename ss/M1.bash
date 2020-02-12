@@ -74,11 +74,11 @@ cd ~/sandbox;
 }
 
 setsc(){
-    
+
     sortalg="radixsort.py"
     I="$HOME/.trinkets/.shortcuts"
     O="$HOME/.trinkets/.shortcutsx"
-    
+
     if [ "$2" "==" "" ]; then
 	INDIR=$PWD
     elif [ -d "$2" ]; then
@@ -93,7 +93,7 @@ setsc(){
     if grep --silent ";$INSC:" ~/.trinkets/.shortcuts && grep -q ":$INDIR;" ~/.trinkets/.shortcuts; then
 	PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##"; )
 	PRESC=$( grep ":$INDIR;" ~/.trinkets/.shortcuts | cut -d":" -f 1 | sed "s#;##"; )
-	
+
 	if [[ "$INDIR" == "$PREDIR" && "$INSC" == "$PRESC" ]] ; then
 	    echo "relationship already exists!"
 	else
@@ -129,9 +129,9 @@ setsc(){
       	    esac
     	done
     else
-	echo ";$INSC:$INDIR;" >> ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I" 
+	echo ";$INSC:$INDIR;" >> ~/.trinkets/.shortcuts ; pysc "$sortalg" "$I" "$O" 0 ; mv "$O" "$I"
     fi
-    
+
 }
 
 remsc(){
@@ -139,7 +139,7 @@ remsc(){
     O="$HOME/.trinkets/.shortcutsx"
     INSC=$1
     PREDIR=$( grep ";$INSC:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" )
-    echo "are you sure you want to remove the relationship:" 
+    echo "are you sure you want to remove the relationship:"
     echo "${bold}$INSC${normal} -> ${bold}$PREDIR${normal}"
     echo "y/n? "
     while true; do
@@ -159,5 +159,6 @@ cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
 }
 
 listsc(){
-    cat ~/.trinkets/.shortcuts;
+  listalg="listsc.py"
+    pysc $listalg ~/.trinkets/.shortcuts;
 }

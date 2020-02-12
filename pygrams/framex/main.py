@@ -9,12 +9,12 @@ while 1:
     except:
         if user_in == '.q' or user_in == 'exit':
             exit()
+        elif user_in == '.h' or user_in == 'help':
+            print('exapmles: cube, f1, f2, param')
         else:
 
             type,f,xmin,xmax,ymin,ymax, density, linestyle,withgrid, background = user_in.split(',')
             
             if type == 'z':
                 framex.z(f,xmin,xmax,ymin,ymax, density, linestyle,withgrid, background)
-        
-        print('that is its own function.')
 
