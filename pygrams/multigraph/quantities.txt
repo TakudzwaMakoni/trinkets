@@ -1,0 +1,11 @@
+Mobile cellular subscriptions (per 100 people)
+Electric power consumption (kWh per capita)
+Industry (% of GDP)
+Inflation consumer prices (annual %)
+Energy use (kg of oil equivalent per capita)
+GDP (current US$)
+Services etc. (% of GDP)
+Total Population
+Imports of goods and services (% of GDP)
+Primary completion rate  (% of relevant age group)
+Exports of goods and services (% of GDP)
