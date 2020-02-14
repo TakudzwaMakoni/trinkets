@@ -1,29 +1,32 @@
 # list.py by Takudzwa Makoni 2020
 
 import sys
-from os import listdir
-import os.path as path
+import os
+import datetime
 
 option = sys.argv[1]
 directory = sys.argv[2]
-entities = listdir(directory)
+entities = os.listdir(directory)
+entities = [ entity for entity in entities if entity[0] != "." ] if option == "False" else entities
+
+padding = len(max(entities, key=len)) + 3
 entities.sort(key=str.casefold)
-header = "{0:<25}{1}".format("entity","type")
+header = "{0:<{4}}{1:<10}{2:<10}{3}".format("entity","type","access","modified", padding)
 print("\n\033[4m" + header + "\033[0m", "\n")
 for entity in entities:
-    if path.isfile(path.join(directory, entity)):
-        #print("file!")
-        type = " file"
-    elif path.isdir(path.join(directory, entity)):
-        #print("directory!")
-        type = " directory"
+    fullPath = os.path.join(directory, entity)
+    read = "r" if os.access(fullPath, os.R_OK) else "-"
+    write = "w" if os.access(fullPath, os.R_OK) else "-"
+    execute = "x" if os.access(fullPath, os.R_OK) else "-"
+    try:
+        modified = datetime.datetime.fromtimestamp(os.stat(fullPath).st_mtime).strftime("%d-%m-%Y %H:%M")
+    except:
+        modified = "unknown"
+    if os.path.isfile(fullPath):
+        type = "file"
+    elif os.path.isdir(fullPath):
+        type = "directory"
     else:
         type = "unknown"
-    if option == "False":
-        if entity[0] == ".":
-            pass
-        else:
-            print("{0:<25}{1}".format(entity, type))
-    else:
-        print("{0:<25}{1}".format(entity, type))
+    print("{0:<{6}}{1:<12}{2}{3}{4:<3}{5}".format(entity, type, read, write, execute, modified, padding))
 print()
