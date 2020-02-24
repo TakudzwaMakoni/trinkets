@@ -1,5 +1,4 @@
-;bosdc:/home/takudzwa/dev/BlackOSDC;
 ;dev:/home/takudzwa/dev;
-;displayc:/home/takudzwa/dev/BlackOSDC/Framework/Display;
-;display:/home/takudzwa/dev/BlackOSDev/Framework/Display;
+;displayc:/home/takudzwa/dev/BlackOSDC/Framework/DisplayKernel/;
+;trinkets:/home/takudzwa/dev/BlackOSDC/Framework/Trinkets;
 ;tr:/home/takudzwa/.trinkets;

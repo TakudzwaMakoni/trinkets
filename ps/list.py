@@ -9,6 +9,13 @@ directory = sys.argv[2]
 entities = os.listdir(directory)
 entities = [ entity for entity in entities if entity[0] != "." ] if option == "False" else entities
 
+if len(entities) == 0 and option == "False":
+    print("no entities to show. (excl. hidden)")
+    exit(0)
+elif len(entities) == 0 and option == "True":
+    print("no entites to show.")
+    exit(0)
+
 padding = len(max(entities, key=len)) + 3
 entities.sort(key=str.casefold)
 header = "{0:<{4}}{1:<10}{2:<10}{3}".format("entity","type","access","modified", padding)

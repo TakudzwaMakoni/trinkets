@@ -1,6 +1,6 @@
 #!/bin/bash
 
-setsc(){
+set-shortcut(){
 
     sortalg="radixsort.py"
     I="$HOME/.trinkets/.shortcuts"
@@ -61,7 +61,7 @@ setsc(){
 
 }
 
-remsc(){
+remove-shortcut(){
     I="$HOME/.trinkets/.shortcuts"
     O="$HOME/.trinkets/.shortcutsx"
     INSC=$1
@@ -81,11 +81,11 @@ remsc(){
         done
 }
 
-sc(){
+shortcut(){
 cd $( grep ";$1:" ~/.trinkets/.shortcuts | cut -d":" -f 2 | sed "s#;##" );
 }
 
-listsc(){
+list-shortcuts(){
   listalg="listsc.py"
     pysc $listalg ~/.trinkets/.shortcuts;
 }

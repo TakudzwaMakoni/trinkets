@@ -89,11 +89,11 @@ fi
 fi
 }
 
-inv(){
+invert-screen(){
 printf "\e[?5h"
 }
 
-list(){
+list-children(){
 	OPTIND=1 # Reset in case getopts has been used previously in the shell.
 	showHidden="False"
 	while getopts a opt; do
@@ -115,35 +115,21 @@ list(){
 	fi
 }
 
-#list(){
-#	listalg="list.py"
-#	if [[ "$1" == "" ]]
-#	then
-#		DIR=$PWD
-#		OPT="none"
-#		pysc "$listalg" "$DIR" "$OPT"
-#	elif [[ "$1" == "" ]]
-#	elif [ -d "$1" ]
-#	then
-#		DIR=$1
-#		pysc "$listalg" "$DIR"
-#	else
-#		echo "not a directory"
-#	fi
-#}
+reload-shell(){
+# reset && . ~/.bashrc; 
+exec bash
+}
 
-reload(){ reset && . ~/.bashrc; }
-
-refresh(){
-if [ $1 == "--hard" ] || [ $1 == "-h"  ]
+refresh-shell(){
+if [ "$1" == "--hard" ] || [ "$1" == "-h"  ]
 then
-	# reset terminal and
+	# reset terminal and load trinkets startpage
 	reset && aboutTrinkets
 else
 	clear && aboutTrinkets
 fi
 }
 
-rev(){
+revert-screen(){
 printf "\e[?5l"
 }

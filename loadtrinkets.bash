@@ -6,7 +6,7 @@ test -e "${HOME}/.trinkets/ss/M0.bash" &&
 . "${HOME}/.trinkets/ss/M0.bash";
 if [ -f ${HOME}/.trinkets/exec/gws ] && [ -f ${HOME}/.trinkets/.about  ]
 then
- 	aboutTrinkets
+	clear && aboutTrinkets
 fi
 }
 
