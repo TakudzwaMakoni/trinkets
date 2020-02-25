@@ -67,8 +67,34 @@ cursor-position-utility-x(){
 
 navigate-dir(){
 cursor_pos_y=$(cursor-position-utility-y)
-${HOME}/.trinkets/exec/NavigateDir $cursor_pos_y
+
+OPTIND=1 # Reset in case getopts has been used previously in the shell.
+showHidden="False"
+while getopts a opt; do
+	case $opt in
+		a) showHidden="True"
+		;;
+		*) return
+		;;
+	esac
+	shift
+done
+
+DIR=${1:-${PWD}}
+if [ -d $DIR ]
+then
+${HOME}/.trinkets/exec/NavigateDir $showHidden $cursor_pos_y $DIR
+else
+	echo "$DIR is not a directory"
+fi
+
 file="/tmp/navigationDirectory.txt"
 path=$(cat "$file")
-cd $path
+if [ -d $path ]
+then
+	cd $path
+elif [ -f $path ]
+then
+	echo "no implementation for opening file yet"
+fi
 }
