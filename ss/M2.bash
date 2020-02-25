@@ -70,6 +70,7 @@ cursor_pos_y=$(cursor-position-utility-y)
 
 OPTIND=1 # Reset in case getopts has been used previously in the shell.
 showHidden="False"
+
 while getopts a opt; do
 	case $opt in
 		a) showHidden="True"
@@ -83,9 +84,16 @@ done
 DIR=${1:-${PWD}}
 if [ -d $DIR ]
 then
-${HOME}/.trinkets/exec/NavigateDir $showHidden $cursor_pos_y $DIR
+	${HOME}/.trinkets/exec/NavigateDir $showHidden $cursor_pos_y $DIR
+	exitStatus=$?
+	if [ $exitStatus != 0 ]
+	then
+		echo "user exited"
+		return 1
+	fi
 else
 	echo "$DIR is not a directory"
+	return 1
 fi
 
 file="/tmp/navigationDirectory.txt"
@@ -95,6 +103,16 @@ then
 	cd $path
 elif [ -f $path ]
 then
-	echo "no implementation for opening file yet"
+	if [[ $EDITOR == "" ]]
+	then
+		echo "no EDITOR environment variable set"
+	else
+		if [ -r $path ] && [ -w $path ]
+		then
+		$EDITOR $path
+		else
+			sudo $EDITOR $path
+		fi
+	fi
 fi
 }
