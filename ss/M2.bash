@@ -17,7 +17,7 @@ pysc(){
     python3 "$@"
 }
 
-cursor-position-utility-y(){
+cursor-position-y(){
 	exec < /dev/tty
 	oldstty=$(stty -g)
 	stty raw -echo min 0
@@ -28,28 +28,11 @@ cursor-position-utility-y(){
 	stty $oldstty
 	# change from one-based to zero based so they work with: tput cup $row $col
 	row=$((${pos[0]:2} - 1))    # strip off the esc-[
-	col=$((${pos[1]} - 1))
-
-	echo "$row,$col"
-}
-
-cursor-position-utility-y(){
-	exec < /dev/tty
-	oldstty=$(stty -g)
-	stty raw -echo min 0
-	# on my system, the following line can be replaced by the line below it
-	echo -en "\033[6n" > /dev/tty
-	# tput u7 > /dev/tty    # when TERM=xterm (and relatives)
-	IFS=';' read -r -d R -a pos
-	stty $oldstty
-	# change from one-based to zero based so they work with: tput cup $row $col
-	row=$((${pos[0]:2} - 1))    # strip off the esc-[
-	col=$((${pos[1]} - 1))
 
 	echo "$row"
 }
 
-cursor-position-utility-x(){
+cursor-position-x(){
 	exec < /dev/tty
 	oldstty=$(stty -g)
 	stty raw -echo min 0
@@ -59,21 +42,19 @@ cursor-position-utility-x(){
 	IFS=';' read -r -d R -a pos
 	stty $oldstty
 	# change from one-based to zero based so they work with: tput cup $row $col
-	row=$((${pos[0]:2} - 1))    # strip off the esc-[
 	col=$((${pos[1]} - 1))
 
 	echo "$col"
 }
 
 navigate-dir(){
-cursor_pos_y=$(cursor-position-utility-y)
 
 OPTIND=1 # Reset in case getopts has been used previously in the shell.
-showHidden="False"
+showHidden="0" # c++ interpretation of 'false'.
 
 while getopts a opt; do
 	case $opt in
-		a) showHidden="True"
+		a) showHidden="1" # true.
 		;;
 		*) return
 		;;
@@ -84,10 +65,11 @@ done
 DIR=${1:-${PWD}}
 if [ -d $DIR ]
 then
-	${HOME}/.trinkets/exec/NavigateDir $showHidden $cursor_pos_y $DIR
+	${HOME}/.trinkets/exec/NavigateDir $showHidden $DIR
 	exitStatus=$?
 	if [ $exitStatus != 0 ]
 	then
+		echo " "
 		echo "user exited"
 		return 1
 	fi
